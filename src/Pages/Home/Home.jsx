@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import Nav from "../../components/Nav";
 import MainPage from "./MainPage";
 
 const Home = () => {
