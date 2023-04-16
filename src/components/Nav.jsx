@@ -1,6 +1,7 @@
 import React from "react";
 
 import lwsLogo from "../assets/images/LWSBlog.svg";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   return (
@@ -8,9 +9,9 @@ const Nav = () => {
       <div className="navbar-container">
         {/* logo */}
         <div className="logo">
-          <a href="index.html">
+          <Link to={"/"}>
             <img src={lwsLogo} alt="search" />
-          </a>
+          </Link>
         </div>
         {/* auth buttons , This will nonfunctional, just for nice looking */}
         <div className="auth-buttons">

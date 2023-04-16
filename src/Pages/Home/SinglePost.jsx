@@ -19,9 +19,9 @@ const SingleBar = ({ data }) => {
             {likes}
           </p>
         </div>
-        <a href="post.html" className="lws-postTitle">
+        <Link to={"/blog/" + id} className="lws-postTitle">
           {title}
-        </a>
+        </Link>
         <div className="lws-tags">
           {tags.map((item) => {
             return <span>#{item},</span>;
