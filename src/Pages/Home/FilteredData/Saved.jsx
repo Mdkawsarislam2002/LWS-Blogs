@@ -1,20 +1,22 @@
 import { useSelector } from "react-redux";
 
 import SinglePost from "../SinglePost";
-import sortBy from "../../../utils/sortBy";
+import sortBy from "../../../Hooks/sortBy";
+import { useEffect } from "react";
 
 const Saved = () => {
   const { savedBlogs } = useSelector((state) => state.savedBlogsSlice);
   const { sortValue } = useSelector((state) => state.sort);
 
   const sortData = sortBy(savedBlogs, sortValue);
+  useEffect(() => {}, [sortData]);
 
   return (
     <div>
-      {savedBlogs.map((items) => {
+      {sortData.map((items) => {
         return <SinglePost key={items.id} data={items} />;
       })}
-      {savedBlogs.length === 0 && <p>No Saved Blogs</p>}
+      {savedBlogs?.length === 0 && <p>No Saved Blogs</p>}
     </div>
   );
 };

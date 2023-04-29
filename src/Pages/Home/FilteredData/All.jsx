@@ -11,7 +11,7 @@ const All = () => {
 
   useEffect(() => {
     dispatch(getHomeBlogs());
-  }, [dispatch]);
+  }, []);
   return (
     <main className="post-container" id="lws-postContainer">
       {blogs.length > 0 &&
