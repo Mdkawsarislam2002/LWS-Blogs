@@ -7,13 +7,12 @@ import { useSelector, useDispatch } from "react-redux";
 
 const SideBar = () => {
   const dispatch = useDispatch();
-  const { sortValue, filterBySaved } = useSelector((state) => state.sort);
+  const { filterBySaved } = useSelector((state) => state.sort);
 
   const selectBoxHandler = (e) => {
     dispatch(sortTask(e.target.value));
   };
 
-  console.log(filterBySaved);
   return (
     <aside>
       <div className="sidebar-items">
@@ -22,7 +21,7 @@ const SideBar = () => {
           <select
             onChange={selectBoxHandler}
             name="sort"
-            id="lws-sort"
+            id="lws-sort" 
             className="w-full max-w-[150px] border-2 rounded-md text-gray-500"
           >
             <option value="default">Default</option>

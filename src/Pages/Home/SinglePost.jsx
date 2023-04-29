@@ -1,9 +1,21 @@
-import React from "react";
+import PropTypes from "prop-types";
+
 import { Link } from "react-router-dom";
 
 const SingleBar = ({ data }) => {
-  const { title, tags, likes, isSaved, image, id, description, createdAt } =
-    data;
+  const { title, tags, likes, isSaved, image, id, createdAt } = data;
+  SingleBar.propTypes = {
+    data: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      tags: PropTypes.arrayOf(PropTypes.object).isRequired,
+      likes: PropTypes.number.isRequired,
+      isSaved: PropTypes.bool.isRequired,
+      image: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+      createdAt: PropTypes.string.isRequired,
+    }).isRequired,
+  };
 
   return (
     <div key={id} className="lws-card">
@@ -40,7 +52,7 @@ const SingleBar = ({ data }) => {
         </Link>
         <div className="lws-tags">
           {tags.map((item) => {
-            return <span>#{item},</span>;
+            return <span key={item}>#{item},</span>;
           })}
         </div>
 

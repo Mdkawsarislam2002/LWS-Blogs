@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-
 import MainPage from "./MainPage";
+import SideBar from "./SideBar";
 
 const Home = () => {
   return (
-    <>
+    <section className="wrapper">
+      <SideBar />
       <MainPage />
-    </>
+    </section>
   );
 };
 

@@ -1,30 +1,18 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-//  redux
-import { useDispatch, useSelector } from "react-redux";
-import getHomeBlogs from "../../Redux/Feature/Home_Blogs/getHomeBlogs";
-
-import SideBar from "./SideBar";
-import SinglePost from "./SinglePost";
+// components
+import All from "./FilteredData/All";
+import Saved from "./FilteredData/Saved";
 
 const MainPage = () => {
-  const dispatch = useDispatch();
-  const { blogs, loading, error } = useSelector((state) => state.homeBlogs);
+  const { filterBySaved } = useSelector((state) => state.sort);
+  useEffect(() => {}, [filterBySaved]);
 
-  useEffect(() => {
-    dispatch(getHomeBlogs());
-  }, []);
   return (
-    <section className="wrapper">
-      <SideBar />
-
-      <main className="post-container" id="lws-postContainer">
-        {blogs.length > 0 &&
-          blogs.map((items) => {
-            return <SinglePost data={items} />;
-          })}
-      </main>
-    </section>
+    <>
+      <div>{filterBySaved ? <Saved /> : <All />}</div>
+    </>
   );
 };
 
