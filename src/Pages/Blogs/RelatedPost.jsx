@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import relatedPostApi from "../../Redux/Feature/RelatedPost/RelatedPostAPI";
+
 import SingleRelatedBlogs from "./SingleRelatedBlogs";
 
-const RelatedPost = ({ currentID, relatedTags }) => {
+const RelatedPost = ({ currentID: currentVideoId, relatedTags: tags }) => {
+  const dispatch = useDispatch();
+  const { singeBlogs, error, loading } = useSelector(
+    (state) => state.relatedPost
+  );
+
+  useEffect(() => {
+    // currentVideoId - tags
+    dispatch(
+      relatedPostApi({
+        currentVideoId,
+        tags,
+      })
+    );
+  }, []);
+
   return (
     <aside>
       <h4 className="mb-4 text-xl font-medium" id="lws-relatedPosts">
@@ -9,7 +27,10 @@ const RelatedPost = ({ currentID, relatedTags }) => {
       </h4>
       <div className="space-y-4 related-post-container">
         {/* related post  */}
-        <SingleRelatedBlogs />
+
+        {singeBlogs?.map((blog) => (
+          <SingleRelatedBlogs relatedBlogData={blog} />
+        ))}
         {/* related post ends */}
       </div>
     </aside>

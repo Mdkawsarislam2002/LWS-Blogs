@@ -1,21 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const SingleRelatedBlogs = () => {
+const SingleRelatedBlogs = ({ relatedBlogData }) => {
+  const { createdAt, description, id, image, isSaved, likes, tags, title } =
+    relatedBlogData;
+
   return (
-    <div className="card">
-      <a href="post.html">
-        <img src={"git"} className="card-image" alt="" />
-      </a>
+    <Link to={`/blog/${id}`} className="card">
+      <img src={image} className="card-image" alt="" />
+
       <div className="p-4">
-        <a href="post.html" className="text-lg post-title lws-RelatedPostTitle">
-          Top Github Alternatives
-        </a>
+        <p className="text-lg post-title lws-RelatedPostTitle">{title}</p>
         <div className="mb-0 tags">
           <span>#python,</span> <span>#tech,</span> <span>#git</span>
         </div>
-        <p>2010-03-27</p>
+        <p>{createdAt}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

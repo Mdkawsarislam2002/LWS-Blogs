@@ -16,7 +16,7 @@ const relatedPost = createSlice({
         state.loading = true;
       })
       .addCase(relatedPostApi.fulfilled, (state, action) => {
-        state.blogs = action.payload;
+        state.singeBlogs = action.payload;
         state.loading = false;
       })
       .addCase(relatedPostApi.rejected, (state, action) => {
