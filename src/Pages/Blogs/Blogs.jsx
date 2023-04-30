@@ -15,7 +15,7 @@ const Blogs = () => {
   const dispatch = useDispatch();
   const { blogs } = useSelector((state) => state?.singleBlog);
   const { savedBlogsSlice } = useSelector((state) => state);
-  console.log(savedBlogsSlice);
+
   useEffect(() => {
     dispatch(singleBlogAPI({ blog_details }));
   }, [blog_details, dispatch]);
