@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import relatedPostApi from "../../Redux/Feature/RelatedPost/RelatedPostAPI";
 
 import SingleRelatedBlogs from "./SingleRelatedBlogs";
 
+// eslint-disable-next-line react/prop-types
 const RelatedPost = ({ currentID: currentVideoId, relatedTags: tags }) => {
   const dispatch = useDispatch();
-  const { singeBlogs, error, loading } = useSelector(
-    (state) => state.relatedPost
-  );
+  const { singeBlogs } = useSelector((state) => state.relatedPost);
 
   useEffect(() => {
     // currentVideoId - tags
@@ -18,7 +17,7 @@ const RelatedPost = ({ currentID: currentVideoId, relatedTags: tags }) => {
         tags,
       })
     );
-  }, []);
+  }, [dispatch, currentVideoId, tags]);
 
   return (
     <aside>
@@ -29,7 +28,7 @@ const RelatedPost = ({ currentID: currentVideoId, relatedTags: tags }) => {
         {/* related post  */}
 
         {singeBlogs?.map((blog) => (
-          <SingleRelatedBlogs relatedBlogData={blog} />
+          <SingleRelatedBlogs key={blog.id} relatedBlogData={blog} />
         ))}
         {/* related post ends */}
       </div>

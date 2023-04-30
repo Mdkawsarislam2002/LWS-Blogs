@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import singleBlogAPI from "./blogAPI";
+import singleBlogAPI, { saveOrUnSaveBlog } from "./blogAPI";
 
 const initialState = {
   singeBlogs: [],
@@ -20,6 +20,18 @@ const singleBlog = createSlice({
         state.loading = false;
       })
       .addCase(singleBlogAPI.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
+      });
+
+    builder
+      .addCase(saveOrUnSaveBlog.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(saveOrUnSaveBlog.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(saveOrUnSaveBlog.rejected, (state, action) => {
         state.error = action.error.message;
         state.loading = false;
       });
