@@ -2,10 +2,6 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import singleBlogAPI from "../../Redux/Feature/PerBlogData/blogAPI";
-import {
-  addSavedBlog,
-  // removeBlogs,
-} from "../../Redux/Feature/SavedBlogs/SavedBlogs";
 
 //  assets
 import RelatedPost from "./RelatedPost";
@@ -14,7 +10,6 @@ const Blogs = () => {
   const { blog_details } = useParams();
   const dispatch = useDispatch();
   const { blogs } = useSelector((state) => state?.singleBlog);
-  const { savedBlogsSlice } = useSelector((state) => state);
 
   useEffect(() => {
     dispatch(singleBlogAPI({ blog_details }));
@@ -23,7 +18,7 @@ const Blogs = () => {
   const activeStyle = blogs?.isSaved ? "active save-btn" : "save-btn";
 
   const SaveHandler = () => {
-    dispatch(addSavedBlog(blogs));
+    console.log("saved");
   };
 
   return (

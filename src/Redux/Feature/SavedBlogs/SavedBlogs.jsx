@@ -1,21 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
+import savedBlogApi from "./SavedBlogAPI";
 
 const initialState = {
   savedBlogs: [],
+  isLoading: false,
+  isError: false,
+  errMsg: "",
 };
 
 const savedBlogsSlice = createSlice({
-  name: "savedBlogs",
+  name: "savedBlogsSlice",
   initialState,
-  reducers: {
-    addSavedBlog: (state, action) => {
-      state.savedBlogs.push(action.payload);
-    },
-    removeBlogs: (state, action) => {
-      console.log("payload", action.payload);
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(savedBlogApi.fulfilled, (state, actions) => {
+        state.savedBlogs = actions.payload;
+        state.isLoading = false;
+        state.isError = false;
+        state.errMsg = "";
+      })
+      .addCase(savedBlogApi.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(savedBlogApi.rejected, (state, actions) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.errMsg = actions.error.message;
+      });
   },
 });
 
-export const { addSavedBlog, removeBlogs } = savedBlogsSlice.actions;
 export default savedBlogsSlice;
