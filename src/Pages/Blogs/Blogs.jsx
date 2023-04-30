@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import singleBlogAPI, {
+  likeIncrement,
   saveOrUnSaveBlog,
 } from "../../Redux/Feature/PerBlogData/blogAPI";
 
@@ -21,6 +22,10 @@ const Blogs = () => {
 
   const SaveHandler = () => {
     dispatch(saveOrUnSaveBlog({ id: blogs?.id, isSaved: blogs?.isSaved }));
+  };
+
+  const LikeHandler = () => {
+    dispatch(likeIncrement({ id: blogs?.id, likes: blogs?.likes }));
   };
 
   return (
@@ -67,6 +72,7 @@ const Blogs = () => {
               <button
                 className="like-btn flex items-center gap-1"
                 id="lws-singleLinks"
+                onClick={LikeHandler}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import singleBlogAPI, { saveOrUnSaveBlog } from "./blogAPI";
+import singleBlogAPI, { saveOrUnSaveBlog, likeIncrement } from "./blogAPI";
 
 const initialState = {
   singeBlogs: [],
@@ -32,6 +32,18 @@ const singleBlog = createSlice({
         state.loading = false;
       })
       .addCase(saveOrUnSaveBlog.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
+      });
+
+    builder
+      .addCase(likeIncrement.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(likeIncrement.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(likeIncrement.rejected, (state, action) => {
         state.error = action.error.message;
         state.loading = false;
       });

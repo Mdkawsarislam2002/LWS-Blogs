@@ -25,4 +25,14 @@ export const saveOrUnSaveBlog = createAsyncThunk(
   }
 );
 
+export const likeIncrement = createAsyncThunk(
+  "Blogs/likeIncrement",
+  async ({ id, likes }) => {
+    let req = await theAxios.patch(`/blogs/${id}`, {
+      likes: likes + 1,
+    });
+    return req.data;
+  }
+);
+
 export default singleBlogAPI;
